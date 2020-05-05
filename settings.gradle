@@ -1,0 +1,3 @@
+rootProject.name='MapsEdition'
+include ':app'
+include ':MG2D'
