@@ -17,6 +17,7 @@ public class mg2dThread extends java.lang.Thread {
     private SurfaceHolder surfaceHolder;
 
     private Scena scena;
+    private boolean newScena;
 
     public mg2dThread(SurfaceHolder surfaceHolder) {
         this.surfaceHolder = surfaceHolder;
@@ -45,6 +46,10 @@ public class mg2dThread extends java.lang.Thread {
                     if (scena == null) continue;
 
                     for (int i = 0; true; i++){
+                        if (newScena){
+                            newScena = false;
+                            break;
+                        }
                         if (scena.get(i) != null)
                             scena.get(i).draw(canvas);
                         else
@@ -69,6 +74,15 @@ public class mg2dThread extends java.lang.Thread {
 
     public void setScena(Scena scena) {
         this.scena = scena;
+        newScena = true;
+    }
+
+    public boolean isNewScena(){
+        return newScena;
+    }
+
+    public void setNewScena(boolean b) {
+        this.newScena = b;
     }
 }
 

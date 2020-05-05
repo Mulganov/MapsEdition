@@ -6,6 +6,9 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import com.mulganov.job.lib.mg2d.graph.Graph;
+import com.mulganov.job.lib.mg2d.scena.Scena;
+
 
 public class mg2dView extends SurfaceView implements SurfaceHolder.Callback {
     private mg2dThread gameThread;
@@ -13,6 +16,11 @@ public class mg2dView extends SurfaceView implements SurfaceHolder.Callback {
     public mg2dView(Context context) {
         super(context);
         getHolder().addCallback(this);
+        gameThread = new mg2dThread(getHolder());
+    }
+
+    public mg2dThread getThread(){
+        return gameThread;
     }
 
     @Override
@@ -23,6 +31,20 @@ public class mg2dView extends SurfaceView implements SurfaceHolder.Callback {
         int ex = (int) event.getX();
         int ey = (int) event.getY();
 
+        if (gameThread.getScena() == null) return true;
+
+        Scena scena = gameThread.getScena();
+
+        for (int i = 0; true; i++){
+            if (gameThread.isNewScena()){
+                gameThread.setNewScena(false);
+                break;
+            }
+            if (scena.get(i) != null)
+                scena.get(i).click(new Graph.Click.Event(ex, ey));
+            else
+                break;
+        }
 
         return true; //processed
     }
@@ -35,7 +57,7 @@ public class mg2dView extends SurfaceView implements SurfaceHolder.Callback {
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-        gameThread = new mg2dThread(getHolder());
+//        gameThread = new mg2dThread(getHolder());
         gameThread.setRunning(true);
         gameThread.start();
     }
