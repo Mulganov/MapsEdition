@@ -75,7 +75,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         s2.add(image);
-
     }
 
     public void hide(){
