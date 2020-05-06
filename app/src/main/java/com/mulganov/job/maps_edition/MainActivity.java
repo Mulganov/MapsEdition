@@ -1,6 +1,7 @@
 package com.mulganov.job.maps_edition;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.os.Bundle;
 import android.view.View;
@@ -13,7 +14,7 @@ import com.mulganov.job.lib.mg2d.scena.Scena;
 
 public class MainActivity extends AppCompatActivity {
 
-    View mContentView;
+    ConstraintLayout mContentView;
     public static MG2D mg2d;
 
 
@@ -31,7 +32,9 @@ public class MainActivity extends AppCompatActivity {
 
         Assets.init(this);
 
+
         mg2d = new MG2D(this);
+        mg2d.setGlobalSize(new Scena.Size(Scena.Size.Format.FORMAT_16X9, this));
 
         createS1();
         createS2();
@@ -40,12 +43,18 @@ public class MainActivity extends AppCompatActivity {
         mg2d.setScena(s1);
 
         addContentView(mg2d.getView(), mContentView.getLayoutParams());
+
     }
 
     private void createS1() {
-        s1= new Scena(this);
+        s1= new Scena(this, mg2d);
 
-        final Image image = new Image(Assets.getBitmap("0.png"), new mg2dMatrix(1, 1, 1000));
+        Scena.Size size = s1.getSize();
+
+        System.out.println(size.getW() + "X" + size.getH());
+        System.out.println(size.getX() + "X" + size.getY());
+
+        final Image image = new Image("auto", Assets.getBitmap("0.png"), new mg2dMatrix(0, 0, mg2dMatrix.Flag.HEIGHT, size.getW()/2));
 
         image.setClick(new Graph.Click() {
             @Override
@@ -56,14 +65,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
         s1.add(image);
 
     }
 
     private void createS2() {
-        s2= new Scena(this);
+        s2= new Scena(this, mg2d);
 
-        final Image image = new Image(Assets.getBitmap("1.png"), new mg2dMatrix(1000, 1, 1000));
+        final Image image = new Image("auto", Assets.getBitmap("1.png"), new mg2dMatrix(1000, 1, 1000));
 
         image.setClick(new Graph.Click() {
             @Override

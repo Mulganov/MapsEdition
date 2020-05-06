@@ -13,13 +13,14 @@ public class Image extends Graph {
 
     private Paint p;
 
-    public Image(final Bitmap bitmap, mg2dMatrix matrix){
+    public Image(String key, final Bitmap bitmap, mg2dMatrix matrix){
+        this.matrix = matrix;
+        setKey(key);
         setW(matrix.getW());
         setH(matrix.getH());
         setX(matrix.getTx());
         setY(matrix.getTy());
         this.bitmap = bitmap;
-        this.matrix = matrix;
         super.setDraw(new Draw() {
             @Override
             public void draw(Canvas canvas) {
@@ -40,11 +41,6 @@ public class Image extends Graph {
 
         int x = getX();
         int y = getY();
-
-        System.out.println("----------------------");
-        System.out.println(xx + "X" + yy);
-        System.out.println(x + "X" + y);
-        System.out.println(matrix.getW() + "X" + matrix.getH());
 
         if (x <= xx && xx <= x + matrix.getW()){
             if (y <= yy && yy <= y + matrix.getH()){
@@ -74,6 +70,18 @@ public class Image extends Graph {
 
     public void setMatrix(mg2dMatrix matrix) {
         this.matrix = matrix;
+    }
+
+    @Override
+    public void setX(int x){
+        matrix.setTx(x);
+        super.setX(x);
+    }
+
+    @Override
+    public void setY(int y){
+        matrix.setTy(y);
+        super.setY(y);
     }
 
 }
