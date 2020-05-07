@@ -13,15 +13,17 @@ import java.util.ArrayList;
 
 public class mg2dThread extends java.lang.Thread {
 
+    private MG2D mg2D;
+
     private boolean runFlag = true;
     private SurfaceHolder surfaceHolder;
 
     private Scena scena;
     private boolean newScena;
 
-    public mg2dThread(SurfaceHolder surfaceHolder) {
+    public mg2dThread(SurfaceHolder surfaceHolder, MG2D mg2D) {
         this.surfaceHolder = surfaceHolder;
-
+        this.mg2D = mg2D;
     }
 
 
@@ -41,7 +43,7 @@ public class mg2dThread extends java.lang.Thread {
                 canvas = surfaceHolder.lockCanvas();
                 if (canvas == null) return;
                 synchronized (surfaceHolder) {
-                    canvas.drawColor(Color.BLACK);
+                    canvas.drawColor(mg2D.getSetting().getBackground());
 
                     if (scena == null) continue;
 
@@ -54,6 +56,10 @@ public class mg2dThread extends java.lang.Thread {
                             scena.get(i).draw(canvas);
                         else
                             break;
+                    }
+
+                    if (mg2D.getSetting().getBorder().isStatus()){
+                        mg2D.getSetting().getBorder().getGraphGroup(mg2D).draw(canvas);
                     }
                 }
 

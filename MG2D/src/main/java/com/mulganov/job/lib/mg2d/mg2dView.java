@@ -13,10 +13,10 @@ import com.mulganov.job.lib.mg2d.scena.Scena;
 public class mg2dView extends SurfaceView implements SurfaceHolder.Callback {
     private mg2dThread gameThread;
 
-    public mg2dView(Context context) {
+    public mg2dView(Context context, MG2D mg2D) {
         super(context);
         getHolder().addCallback(this);
-        gameThread = new mg2dThread(getHolder());
+        gameThread = new mg2dThread(getHolder(), mg2D);
     }
 
     public mg2dThread getThread(){

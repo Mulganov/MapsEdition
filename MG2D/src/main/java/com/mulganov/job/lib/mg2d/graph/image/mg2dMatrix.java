@@ -22,15 +22,15 @@ public class mg2dMatrix {
             if (flag.equalsIgnoreCase(Flag.WIDTH)){
 
                 this.w = size;
-                this.h = (int) (bitmap.getHeight()/(float)size * bitmap.getWidth());
-                matrix.postScale((float) size / bitmap.getWidth(), bitmap.getHeight()/(float)size * bitmap.getWidth()  / bitmap.getHeight());
+                this.h = (int) (((float)size * bitmap.getHeight()) / bitmap.getWidth());
+                matrix.postScale((float)this.w  / bitmap.getWidth(), (float)this.h  / bitmap.getHeight());
             }
             else
             if (flag.equalsIgnoreCase(Flag.HEIGHT)){
 
-                this.w = (int) (bitmap.getWidth() / (float)size * bitmap.getHeight());
+                this.w = (int) (((float)size * bitmap.getWidth()) / bitmap.getHeight());
                 this.h = size;
-                matrix.postScale(bitmap.getWidth() / (float)size * bitmap.getHeight() / bitmap.getWidth(), (float)size  / bitmap.getHeight());
+                matrix.postScale((float)this.w  / bitmap.getWidth(), (float)this.h  / bitmap.getHeight());
             }
         }else
         if (size == 0)

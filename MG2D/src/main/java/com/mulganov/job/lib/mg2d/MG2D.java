@@ -1,21 +1,21 @@
 package com.mulganov.job.lib.mg2d;
 
-import android.app.Activity;
 import android.content.Context;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.mulganov.job.lib.mg2d.scena.Scena;
+import com.mulganov.job.lib.mg2d.setting.Setting;
 
 
 public class MG2D {
     private mg2dThread thread;
     private mg2dView view;
 
-    private Scena.Size size;
+    private Setting setting = new Setting();
+
 
     public MG2D(Context context){
-        view = new mg2dView(context);
+        view = new mg2dView(context, this);
         thread = view.getThread();
     }
 
@@ -31,11 +31,11 @@ public class MG2D {
         return thread.getScena();
     }
 
-    public Scena.Size getGlobalSize() {
-        return size;
+    public Setting getSetting() {
+        return setting;
     }
 
-    public void setGlobalSize(Scena.Size size) {
-        this.size = size;
+    public void setSetting(Setting setting) {
+        this.setting = setting;
     }
 }

@@ -3,6 +3,8 @@ package com.mulganov.job.maps_edition;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
 
@@ -11,6 +13,7 @@ import com.mulganov.job.lib.mg2d.graph.Graph;
 import com.mulganov.job.lib.mg2d.graph.image.Image;
 import com.mulganov.job.lib.mg2d.graph.image.mg2dMatrix;
 import com.mulganov.job.lib.mg2d.scena.Scena;
+import com.mulganov.job.lib.mg2d.setting.Border;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,7 +37,12 @@ public class MainActivity extends AppCompatActivity {
 
 
         mg2d = new MG2D(this);
-        mg2d.setGlobalSize(new Scena.Size(Scena.Size.Format.FORMAT_16X9, this));
+        mg2d.getSetting().setSize(new Scena.Size(Scena.Size.Format.FORMAT_16X9, this));
+        Border border = mg2d.getSetting().getBorder();
+        border.setColor(Color.RED);
+        border.setStatus(true);
+
+        mg2d.getSetting().setBackground(Color.YELLOW);
 
         createS1();
         createS2();
@@ -51,10 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
         Scena.Size size = s1.getSize();
 
-        System.out.println(size.getW() + "X" + size.getH());
-        System.out.println(size.getX() + "X" + size.getY());
-
-        final Image image = new Image("auto", Assets.getBitmap("0.png"), new mg2dMatrix(0, 0, mg2dMatrix.Flag.HEIGHT, size.getW()/2));
+        final Image image = new Image("auto", Assets.getBitmap("0.png"), new mg2dMatrix(0, 0, mg2dMatrix.Flag.WIDTH, size.getW()/2));
 
         image.setClick(new Graph.Click() {
             @Override

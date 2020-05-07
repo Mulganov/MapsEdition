@@ -20,14 +20,18 @@ public class Scena {
 
     private int keyInt;
 
-    public Scena(Context context, Size size){
-        this.context = context;
-        this.size = size;
-    }
+//    public Scena(Context context, Size size){
+//        this.context = context;
+//        this.size = size;
+//    }
 
     public Scena(Context context, MG2D mg2D){
         this.context = context;
-        this.size = mg2D.getGlobalSize();
+        if (mg2D.getSetting().getSize() == null){
+            System.out.println("[ERROR] -> [Scena] -> [constucter] -> mg2D.getSetting().getSize() == null" );
+            Toast.makeText(context, "[ERROR] -> [Scena] -> [constucter] -> mg2D.getSetting().getSize() == null " , Toast.LENGTH_LONG).show();
+        }
+        this.size = mg2D.getSetting().getSize();
     }
 
     public void add(Graph graph){
