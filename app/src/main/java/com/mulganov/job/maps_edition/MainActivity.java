@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
         Scena.Size size = s1.getSize();
 
-        final Image image = new Image("auto", Assets.getBitmap("0.png"), new mg2dMatrix(0, 0, mg2dMatrix.Flag.WIDTH, size.getW()/2));
+        final Image image = new Image("auto", Assets.getBitmap("0.png"), new mg2dMatrix(size.getX(), size.getY(), mg2dMatrix.Flag.WIDTH, size.getW()/2));
 
         image.setClick(new Graph.Click() {
             @Override

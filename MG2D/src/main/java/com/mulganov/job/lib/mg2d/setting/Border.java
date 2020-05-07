@@ -45,7 +45,7 @@ public class Border {
         paint.setColor(color);
 
         Rect up = new Rect("border_up", 0, 0, size.getOriginalW(), size.getY(), paint);
-        Rect down = new Rect("border_down", 0, size.getH() + size.getY(), size.getOriginalW(), size.getH() + size.getY(), paint);
+        Rect down = new Rect("border_down", 0, size.getH() + size.getY(), size.getOriginalW(), size.getOriginalH(), paint);
 
         Rect left = new Rect("border_left", 0, 0, size.getX(), size.getOriginalH(), paint);
         Rect right = new Rect("border_right", size.getX() + size.getW(), 0, size.getOriginalW(), size.getOriginalH(), paint);
